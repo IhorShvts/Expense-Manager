@@ -1,0 +1,47 @@
+.item {
+
+    max-width: 768px;
+    min-width: 768px;
+    margin: 0 auto;
+    padding: 30px 0 30px 0;
+
+}
+
+.profile-button {
+    background: #00a648;
+    color: aliceblue;
+}
+
+.profile-buttons {
+    margin-top: 25px;
+}
+
+.show-errors {
+    margin-top: 20px;
+    position: absolute;
+    font-size: 12px;
+
+}
+
+.last-login-info {
+    display: inline;
+    margin-right: 12px;
+}
+
+.header-subtitle {
+    margin-top: 40px;
+}
+
+.last-login-date {
+    margin-right: 5px;
+}
+
+.change-password {
+    margin-top: 18px;
+}
+
+.change-password-text {
+    color: #3F51B5;
+    text-decoration: underline;
+    cursor: pointer;
+}

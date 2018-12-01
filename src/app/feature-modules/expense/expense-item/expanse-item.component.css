@@ -1,0 +1,31 @@
+.item {
+    max-width: 768px;
+    min-width: 768px;
+    margin: 0 auto;
+    padding: 30px 0 30px 0;
+}
+
+.expense-button {
+    background: #00a648;
+    color: aliceblue;
+}
+
+.expense-buttons {
+    margin-top: 20px;
+}
+
+.text-block {
+    font-size: 20px;
+}
+
+.text-title {
+    font-weight: 600;
+}
+
+text-icon {
+    margin-left: 5px;
+}
+
+.description-text {
+    margin-left: 8px;
+}

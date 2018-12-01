@@ -1,0 +1,92 @@
+<div class="item" fxLayout="column">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>{{ pgTitle }} Expense</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="expenseForm" (ngSubmit)="saveExpense(expenseForm.value)" novalidate
+                  autocomplete="off">
+                <div class="field-container"
+                     fxLayout="column"
+                     fxLayoutGap="30px">
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Date</mat-label>
+                        <input matInput [matDatepicker]="picker" id="expdt" [formControl]="expdate" readonly
+                               (click)="picker.open()" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <div class="show-errors"
+                             *ngIf="expenseForm.get('expdate').dirty && expenseForm.get('expdate').errors">
+                            <mat-error
+                                    *ngIf="expenseForm.get('expdate').errors.required">
+                                Please enter date
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="expenseForm.get('expdate').errors.pattern">
+                                Please enter a valid date
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Account</mat-label>
+                        <mat-select [formControl]="expaccount" required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let a of acc" [value]="a">
+                                {{a}}
+                            </mat-option>
+                        </mat-select>
+                        <div class="show-errors"
+                             *ngIf="expenseForm.get('expaccount').dirty && expenseForm.get('expaccount').errors">
+                            <mat-error
+                                    *ngIf="expenseForm.get('expaccount').errors.required">
+                                Please select expense account
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Amount</mat-label>
+                        <input matInput type="number" id="expamt" [formControl]="expamt" required>
+                        <mat-icon matSuffix>attach_money</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="expenseForm.get('expamt').dirty && expenseForm.get('expamt').errors">
+                            <mat-error
+                                    *ngIf="expenseForm.get('expamt').errors.required">
+                                Please enter amount
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="expenseForm.get('expamt').errors.pattern">
+                                Please enter a valid amount
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput
+                                  cdkTextareaAutosize
+                                  #autosize="cdkTextareaAutosize"
+                                  cdkAutosizeMinRows="2"
+                                  cdkAutosizeMaxRows="5"
+                                  id="expdesc" [formControl]="expdesc"></textarea>
+                        <mat-icon matSuffix>text_format</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="expense-buttons" fxLayoutAlign="space-between">
+                    <button mat-raised-button
+                            color="primary"
+                            (click)="onBack()">
+                        Back
+                    </button>
+                    <button mat-raised-button
+                            class="expense-button"
+                            type="submit" [disabled]="expenseForm.invalid">
+                        {{ btnLbl }}
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

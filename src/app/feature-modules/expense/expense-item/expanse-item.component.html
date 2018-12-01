@@ -1,0 +1,43 @@
+<div class="item" fxLayout="column">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>View Expense</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="text-block">
+                <span class="text-title">Date: </span>
+                {{ expense?.expensedate | date: 'd MMM y' }}
+                <mat-icon matSuffix class="text-icon">date_range</mat-icon>
+            </p>
+            <p class="text-block">
+                <span class="text-title">Account: </span>
+                {{ expense?.expensetype }}
+                <mat-icon matSuffix class="text-icon">list</mat-icon>
+            </p>
+            <p class="text-block">
+                <span class="text-title">Amount: </span>
+                {{ expense?.expenseamt | currency: 'USD' }}
+                <mat-icon matSuffix class="text-icon">attach_money</mat-icon>
+            </p>
+            <div class="text-block">
+                <span class="text-title">Description</span>
+                <mat-icon matSuffix class="text-icon">text_format</mat-icon>
+                <p class="description-text">{{ expense?.expensedesc }}</p>
+            </div>
+        </mat-card-content>
+
+        <div class="expense-buttons" fxLayoutAlign="space-between">
+            <button mat-raised-button
+                    color="primary"
+                    (click)="onBack()">
+                Back
+            </button>
+            <button mat-raised-button
+                    class="expense-button"
+                    type="button"
+                    (click)="goEdit()">
+                Edit
+            </button>
+        </div>
+    </mat-card>
+</div>

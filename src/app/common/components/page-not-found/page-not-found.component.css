@@ -1,0 +1,6 @@
+.item {
+    max-width: 768px;
+    min-width: 768px;
+    margin: 0 auto;
+    padding: 30px 0 30px 0;
+}

@@ -1,0 +1,153 @@
+<div class="item" fxLayout="column">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Expense Report</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="reportForm" (ngSubmit)="getReport(reportForm.value)" novalidate
+                  autocomplete="off">
+                <div class="field-container"
+                     fxLayout="column"
+                     fxLayoutGap="30px">
+
+                    <mat-radio-group [formControl]="report" fxLayoutAlign="center center" fxLayoutGap="15px"
+                                     class="report-radio-button">
+                        <mat-radio-button value="opt1" name="report" checked>Current month</mat-radio-button>
+                        <mat-radio-button value="opt2" name="report">Date range</mat-radio-button>
+                        <mat-radio-button value="opt3" name="report">All</mat-radio-button>
+                    </mat-radio-group>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Start date</mat-label>
+                        <input matInput [matDatepicker]="picker1" id="startdate" [formControl]="startdt"
+                               placeholder="Start Date" readonly (click)="picker1.open()" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                        <div class="show-errors"
+                             *ngIf="reportForm.get('startdt').dirty && reportForm.get('startdt').invalid">
+                            <mat-error>
+                                Please enter date
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>End date</mat-label>
+                        <input matInput [matDatepicker]="picker2" id="enddate" [formControl]="enddt"
+                               placeholder="End Date" readonly (click)="picker2.open()" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <div class="show-errors"
+                             *ngIf="reportForm.get('enddt').dirty && reportForm.get('enddt').invalid">
+                            <mat-error>
+                                Please enter end date
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                </div>
+                <div class="expense-buttons" fxLayoutAlign="end">
+
+                    <button mat-raised-button
+                            class="expense-button"
+                            type="submit" [disabled]="reportForm.invalid">
+                        Show Report
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="item no-item" fxLayout="column" *ngIf="expenses && totalrows < 1">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>No expense found</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="text-block" fxLayoutAlign="center center">
+                It seems like you havn't entered any expense for the selected criteria. Please enter you expenses
+                <a routerLink="/expense" class="no-expenses-link">here</a>.
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<div class="item data-table" fxLayout="column" *ngIf="expenses && totalrows > 0">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title class="report-table-title">Expense report <i>{{reportTitle}}</i> <b
+                    class="report-table-title__price">({{ exptotal?.total | currency: 'USD' }})</b>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayoutAlign="center center" class="report-table">
+
+            <table mat-table [dataSource]="expenses" class="mat-elevation-z8" class="table-width">
+                <ng-container matColumnDef="Date">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortExpense('expensedate')" class="table-sort">Date</th>
+                    <td mat-cell *matCellDef="let exp"> {{ exp.expensedate | date: 'd MMM y'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Account">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortExpense('expensetype')"  class="table-sort">Account</th>
+                    <td mat-cell *matCellDef="let exp"> {{ exp.expensetype}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Description">
+                    <th mat-header-cell *matHeaderCellDef>Description</th>
+                    <td mat-cell *matCellDef="let exp"> {{ (exp.expensedesc !== null) ? (exp.expensedesc |
+                        truncate:'14':true) : ''}}
+                    </td>
+
+                </ng-container>
+                <ng-container matColumnDef="Amount">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortExpense('expenseamt')"  class="table-sort">Amount</th>
+                    <td mat-cell *matCellDef="let exp"> {{ exp.expenseamt | currency: 'USD' }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Details">
+                    <th mat-header-cell *matHeaderCellDef>Details</th>
+                    <td mat-cell *matCellDef="let exp">
+                        <button mat-icon-button color="primary" type="button" aria-label="View"
+                                (click)="showExpense(exp._id)">
+                            <mat-icon class="mat-18">reorder</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Edit">
+                    <th mat-header-cell *matHeaderCellDef>Edit</th>
+                    <td mat-cell *matCellDef="let exp">
+                        <button mat-icon-button color="accent" type="button" aria-label="Edit"
+                                (click)="editExpense(exp._id)">
+                            <mat-icon class="edit-pencil">edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef>Delete</th>
+                    <td mat-cell *matCellDef="let exp; let expIndex = index;">
+
+                        <button mat-icon-button color="warn" type="button" aria-label="Delete"
+                                (click)="confirmDel(expIndex, exp._id)">
+                            <mat-icon class="mat-18">delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </mat-card-content>
+        <mat-card-footer>
+            <div style="text-align:center" *ngIf="expenses && totalrows > 10" class="paginator">
+                <span class="items-per-page"> Items per page: 10</span>
+                <span *ngFor="let item of createPager(pgCounter); let idx = index">
+                            <a [ngClass]="{'selected': qpage == idx + 1 }" class="selected" style="cursor:pointer"
+                               (click)="setPage(idx + 1)">
+                                <button mat-mini-fab color="primary" class="paginator-button">{{ idx + 1 }}</button>
+                            </a>
+                        </span>
+                <span class="all-rows">1 - 10 of {{totalrows}}</span>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>

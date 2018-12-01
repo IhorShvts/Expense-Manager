@@ -1,0 +1,44 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    min-height: 100%;
+    background: #d3cce3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #d3cce3, #e9e4f0); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #d3cce3, #e9e4f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+
+.error-message {
+    background: #cd343b;
+    color: aliceblue;
+    font-weight: 500;
+}
+
+.error-message span {
+    color: aliceblue;
+}
+
+.info-message {
+    background: #2196F3;
+    color: aliceblue;
+    font-weight: 500;
+}
+
+.info-message span {
+    color: aliceblue;
+}
+
+.success-message {
+    background: #00a648;
+    color: aliceblue;
+    font-weight: 500;
+}
+
+.success-message span {
+    color: aliceblue;
+}
+

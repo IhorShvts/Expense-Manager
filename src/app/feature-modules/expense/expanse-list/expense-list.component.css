@@ -1,0 +1,81 @@
+.item {
+
+    max-width: 768px;
+    min-width: 768px;
+    margin: 0 auto;
+    padding-top:30px;
+}
+
+.expense-button {
+    background: #00a648;
+    color: aliceblue;
+}
+
+.expense-buttons {
+    margin-top: 25px;
+}
+
+.show-errors {
+    margin-top: 20px;
+    position: absolute;
+    font-size: 12px;
+
+}
+
+.report-radio-button {
+    margin-top: 15px;
+}
+
+.report-table-title {
+    margin: 15px 0 15px 0;
+}
+
+.report-table-title__price {
+    margin-left: 7px;
+}
+
+.edit-pencil {
+    color: #00a648;
+}
+
+.report-table {
+    margin-top: 15px;
+
+}
+
+.table-width {
+    max-width: 700px;
+    min-width: 700px;
+}
+
+.items-per-page {
+    margin-right: 7px;
+    font-weight: 500;
+}
+
+.paginator {
+    margin: 15px 0 15px 0;
+}
+
+.all-rows {
+    margin-left: 7px;
+    font-weight: 500;
+}
+
+.paginator-button {
+    margin: 0 4px 0 4px;
+}
+
+.no-expenses-link {
+    margin-left: 5px;
+}
+.table-sort {
+    cursor: pointer;
+}
+.no-item {
+    padding-bottom:30px;
+}
+
+.data-table {
+    padding-bottom:30px;
+}

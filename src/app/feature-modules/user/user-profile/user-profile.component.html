@@ -1,0 +1,99 @@
+<div class="item" fxLayout="column">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>My Profile</mat-card-title>
+        </mat-card-header>
+        <div fxLayoutAlign="space-between" class="header-subtitle">
+            <mat-form-field appearance="fill" class="field">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" class="form-control" [formControl]="email" id="email">
+            </mat-form-field>
+            <div class="last-login-info">
+                <mat-label>Last Login:</mat-label>
+                <span class="last-login-date">{{ userObj.lastlogin | date:'medium' }}</span>
+                <mat-icon matSuffix> perm_contact_calendar</mat-icon>
+            </div>
+        </div>
+        <mat-card-content>
+            <form [formGroup]="profileForm" (ngSubmit)="updateUser(profileForm.value)" novalidate
+                  autocomplete="off">
+                <div class="field-container"
+                     fxLayout="column"
+                     fxLayoutGap="30px">
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" class="form-control" [formControl]="name" id="name" required>
+                        <mat-icon matSuffix>supervised_user_circle</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="profileForm.get('name').dirty && profileForm.get('name').errors">
+                            <mat-error
+                                    *ngIf="profileForm.get('name').errors.required">
+                                Please enter your Name
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="profileForm.get('name').errors.minlength">
+                                Name must be longer than 2 characters.
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="profileForm.get('name').errors.maxlength">
+                                Name cannot be longer than 16 characters.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput type="number" class="form-control" [formControl]="phonenumber" id="phonenumber"
+                               required>
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="profileForm.get('phonenumber').dirty && profileForm.get('phonenumber').errors ">
+                            <mat-error
+                                    *ngIf="profileForm.get('phonenumber').errors.required">
+                                Please enter your phone number
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="profileForm.get('phonenumber').errors.pattern">
+                                Phone number must contain min 9 max 13 numbers and can contain one "+" symbol
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Link to you avatar</mat-label>
+                        <input matInput type="text" class="form-control" id="avatar" [formControl]="avatar"
+                               pattern="https?://.+" title="Include http://" required>
+                        <mat-icon matSuffix>http</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="profileForm.get('avatar').dirty && profileForm.get('avatar').errors">
+                            <mat-error
+                                    *ngIf="profileForm.get('avatar').errors.required">
+                                Please enter avatar adress
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="profileForm.get('avatar').errors.pattern">
+                                Avatar link address must start with http or https
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="change-password" fxLayoutAlign="center">
+                    <a class="change-password-text" (click)="goToChangePassword()">Do you want to change password ?</a>
+                </div>
+                <div class="profile-buttons" fxLayoutAlign="space-between">
+                    <button mat-raised-button
+                            color="primary"
+                            (click)="goBack()">
+                        Back
+                    </button>
+                    <button mat-raised-button
+                            class="profile-button"
+                            type="submit" [disabled]="profileForm.invalid">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

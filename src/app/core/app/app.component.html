@@ -1,0 +1,38 @@
+<div class="container">
+    <nav>
+        <mat-toolbar color="primary" class="nav-panel">
+            <mat-toolbar-row fxLayoutGap="20px">
+                <a [routerLink]="homeToggle(toggle)" [routerLinkActive]="['active']">Expense Manager
+                </a>
+                <span class="example-spacer"></span>
+                <a routerLink="report" routerLinkActive="active">Report</a>
+                <a routerLink="expense" routerLinkActive="active">Add Expense</a>
+                <a *ngIf="toggle" routerLink="profile" class="user-data" fxLayoutGap="10px"
+                   fxLayoutAlign="center center">
+                    <span class="nav-panel__name" align="middle">{{userName}}</span>
+                    <img [src]="userAvatar" alt="test" id="avatar">
+                </a>
+                <a [routerLink]="loginToggle(toggle)"
+                   routerLinkActive="active-link"
+                   [routerLinkActive]="['active']">
+                    {{toggle ? 'Logout' : 'Login'}}
+                </a>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </nav>
+
+    <main class="content">
+        <router-outlet></router-outlet>
+    </main>
+</div>
+<footer class="footer">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayoutAlign="center center">
+            <div class="container-footer">
+                <p class="footer-text">&copy; Copyright 2018 | Igor Shvets</p>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</footer>
+
+

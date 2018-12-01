@@ -1,0 +1,47 @@
+#avatar {
+    min-width: 45px;
+    min-height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #dddddd;
+    margin-right: 15px;
+}
+
+a:hover {
+    color: #f9f9f9;
+}
+
+.active {
+    color: white;
+}
+
+.text {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.img {
+    display: inline;
+}
+
+.footer-text {
+    color: #dddddd;
+    font-size: 16px;
+}
+
+.container {
+    min-height: calc(100vh - 64px);
+}
+
+
+

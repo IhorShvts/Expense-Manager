@@ -1,0 +1,120 @@
+<div class="item" fxLayout="column">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)" novalidate
+                  autocomplete="off">
+                <div class="field-container"
+                     fxLayout="column"
+                     fxLayoutGap="30px">
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" class="form-control" [formControl]="name" id="name" required>
+                        <mat-icon matSuffix>supervised_user_circle</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="registerForm.get('name').dirty && registerForm.get('name').errors">
+                            <mat-error
+                                    *ngIf="registerForm.get('name').errors.required">
+                                Please enter your Name
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="registerForm.get('name').errors.minlength">
+                                Name must be longer than 2 characters.
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="registerForm.get('name').errors.maxlength">
+                                Name cannot be longer than 16 characters.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="text" class="form-control" [formControl]="email" id="email" required>
+                        <mat-icon matSuffix>alternate_email</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="registerForm.get('email').dirty && registerForm.get('email').errors ">
+                            <mat-error
+                                    *ngIf="registerForm.get('email').errors.required">
+                                Please enter your email
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="registerForm.get('email').errors.pattern">
+                                Please enter a valid email
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput type="number" class="form-control" [formControl]="phonenumber" id="phonenumber"
+                               required>
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="registerForm.get('phonenumber').dirty && registerForm.get('phonenumber').errors ">
+                            <mat-error
+                                    *ngIf="registerForm.get('phonenumber').errors.required">
+                                Please enter your phone number
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="registerForm.get('phonenumber').errors.pattern">
+                                Phone number must contain min 9 max 13 numbers and can contain one "+" symbol
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" class="form-control" [formControl]="password" required>
+                        <mat-icon matSuffix>casino icon</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="registerForm.get('passwordGroup.password').dirty && registerForm.get('passwordGroup.password').errors">
+                            <mat-error
+                                    *ngIf="registerForm.get('passwordGroup.password').errors.required">
+                                Please enter password
+                            </mat-error>
+                            <mat-error
+                                    *ngIf="registerForm.get('passwordGroup.password').errors.pattern">
+                                Password must contain one letter, number & special characters and min 8 symbol length
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="field">
+                        <mat-label>Retype Password</mat-label>
+                        <input matInput type="password" class="form-control" [formControl]="retypepass" id="retypepass"
+                               required>
+                        <mat-icon matSuffix>casino icon</mat-icon>
+                        <div class="show-errors"
+                             *ngIf="(registerForm.get('passwordGroup.retypepass').touched || registerForm.get('passwordGroup.retypepass').dirty) && (registerForm.get('passwordGroup.retypepass').errors || registerForm.get('passwordGroup').errors)">
+                            <mat-error
+                                    *ngIf="registerForm.get('passwordGroup.retypepass').errors?.required">
+                                Please confirm your password
+                            </mat-error>
+                            <mat-error *ngIf="registerForm.get('passwordGroup').errors?.mismatchedPassword">
+                                Password do not match
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+
+                </div>
+                <div class="register-buttons" fxLayoutAlign="space-between">
+                    <button mat-raised-button
+                            color="primary"
+                            (click)="goBack()">
+                        Back
+                    </button>
+                    <button mat-raised-button
+                            class="register-button"
+                            type="submit" [disabled]="registerForm.invalid">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+

@@ -1,0 +1,17 @@
+
+.item {
+    max-width: 768px;
+    min-width: 768px;
+    margin: 0 auto;
+    padding: 50px 50px;
+}
+
+.login-button {
+    background: #00a648;
+    color: aliceblue;
+}
+
+.login-buttons {
+    margin-top: 20px;
+}
+
