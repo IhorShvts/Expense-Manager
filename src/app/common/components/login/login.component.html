@@ -12,7 +12,7 @@
                     <mat-form-field appearance="fill" class="register-field">
                         <mat-label>Email</mat-label>
                         <input matInput type="text" id="inputUser" class="form-control" [formControl]="email"
-                               placeholder="Email" autofocus>
+                               autofocus>
                         <mat-icon matSuffix>alternate_email</mat-icon>
                         <mat-error
                                 *ngIf="loginForm.get('email').dirty && loginForm.get('email').invalid">
@@ -22,8 +22,7 @@
 
                     <mat-form-field appearance="fill" class="register-field">
                         <mat-label>Password</mat-label>
-                        <input matInput type="password" id="inputPassword" class="form-control" [formControl]="password"
-                               placeholder="Password">
+                        <input matInput type="password" id="inputPassword" class="form-control" [formControl]="password">
                         <mat-icon matSuffix>casino icon</mat-icon>
                         <mat-error
                                 *ngIf="loginForm.get('password').dirty && loginForm.get('password').invalid">
