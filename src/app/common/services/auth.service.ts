@@ -37,7 +37,6 @@ export class AuthService {
     login(oUser) {
         return this.http.post('http://localhost:5555/api/login', JSON.stringify(oUser), httpOptions).pipe(
             tap((user: UserMessage) => {
-                console.log(user);
                 if (user.success) {
                     this.currentUser = <IUser>user.message;
                     const userObj: any = {};
