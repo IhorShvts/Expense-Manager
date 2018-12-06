@@ -32,7 +32,6 @@ export class LoginComponent {
         if (this.loginForm.dirty && this.loginForm.valid) {
             this.authService.login(this.loginForm.value)
                 .subscribe((data: any) => {
-                console.log(data);
                     if (data.success === false) {
                         this.messages.error(data.message);
                     } else {
